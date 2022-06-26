@@ -8,33 +8,31 @@ import { Model } from '../model';
 })
 export class TodoComponent {
 
-  message = "";
+  displayAll: boolean = false;
 
   constructor() { }
 
   model = new Model();
 
-  // addItem(txtItem: any) {
-  //   console.log(txtItem.value);
-  // }
+  message: string = "merhaba";
 
   addItem(value: string) {
-    if (value != "") {
-      this.model.items.push({ description: value, action: "no" });
+    if(value!="") {
+      this.model.items.push({ description: value, action: false});
     } else {
-      alert("Bilgi Giriniz");
+      alert("bilgi giriniz");
     }
   }
-
 
   getName() {
     return this.model.name;
   }
 
-
-
   getItems() {
-    return this.model.items;
+    if(this.displayAll) {
+      return this.model.items;
+    }
+    return this.model.items.filter(item => !item.action);
   }
 
 }
