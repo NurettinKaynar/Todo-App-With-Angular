@@ -6,8 +6,16 @@ import { Component } from '@angular/core';
   // selector: '#app-root',
   selector: 'app',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  // template:"<product></product>"
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'todoapp';
+  title = 'Todo App';
+  todoItem = {
+    description: 'Breakfast',
+    action: true,
+  };
+  getTitle() {
+    return this.title;
+  }
 }
