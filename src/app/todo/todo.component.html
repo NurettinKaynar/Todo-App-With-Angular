@@ -1,21 +1,35 @@
 <div class="container">
   <div class="row">
     <div class="col-5 mx-auto">
-      <h3 class="bg-primary text-white p-3">To Do App</h3>
+      <h3 class="bg-primary text-white p-3">{{ getName() }}' todo list</h3>
       <div class="input-group mb-3">
-        <input type="text" class="form-control" name="" id="" />
-        <button type="submit" class="btn btn-outline-primary">Ekle</button>
+        <input #inputTodo type="text" class="form-control" name="" id="" />
+        <!-- <input
+          #inputTodo
+          type="text"
+          class="form-control"
+          name=""
+          id=""
+          (keyup.enter)="addItem(inputTodo.value)"
+          (blur)="addItem(inputTodo.value)"
+        /> -->
+        <button
+          type="submit"
+          class="btn btn-outline-primary"
+          (click)="addItem(inputTodo.value); inputTodo.value = ''"
+        >
+          Ekle
+        </button>
       </div>
-      <div class="form-check mb-3 cursor-wait">
+      <div class="form-check mb-3">
         <input
+          [(ngModel)]="displayAll"
           type="checkbox"
-          class="form-check-input pr-2 cursor-wait"
+          class="form-check-input pr-2"
           name=""
           id="displayAll"
         />
-        <label for="displayAll" class="cursor-wait form-check-label"
-          >Hepsini Göster</label
-        >
+        <label for="displayAll" class="form-check-label">Hepsini Göster</label>
       </div>
       <table class="table table-striped">
         <thead>
@@ -26,23 +40,26 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Kahvaltı</td>
-            <td>Yes</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Spor</td>
-            <td>Yes</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Alışveriş</td>
-            <td>No</td>
+          <tr *ngFor="let items of getItems(); let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ items.description }}</td>
+            <td>{{ items.action }}</td>
+            <td>
+              <input
+                type="checkbox"
+                [(ngModel)]="items.action"
+                name="itemCheckbox"
+                id="itemCheckbox"
+              />
+            </td>
           </tr>
         </tbody>
       </table>
+      <!-- <div>
+        <p *ngFor="let item of items">
+          {{ item.description }}
+        </p>
+      </div> -->
     </div>
   </div>
 </div>
